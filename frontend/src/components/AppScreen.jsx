@@ -1,5 +1,4 @@
-// src/components/AppScreen.jsx
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -9,30 +8,39 @@ function AppScreen() {
   const navigate = useNavigate();
 
   useEffect(() => {
+   
     axios.get('http://localhost:5000/api/applications')
       .then((response) => {
-        const app = response.data.find((app) => app.id === id); 
+        const app = response.data.find((app) => app.id === id);
         setApplication(app);
       })
       .catch((error) => console.error('Error fetching applications:', error));
   }, [id]);
 
-  const handleSimultaneousTabCheck = () => {
-    const otherTabOpen = false; 
-    if (otherTabOpen) {
-      const proceed = window.confirm(
-        'You are already logged into another tab. Do you want to log out of the other tab?'
-      );
-      if (proceed) {
-        alert('Logged out of the other tab.');
-      }
-      navigate('/home');
-    }
-  };
-
   useEffect(() => {
-    handleSimultaneousTabCheck();
-  }, []);
+    // Check for simultaneous tab usage
+    const currentApp = localStorage.getItem('currentApp');
+    if (currentApp && currentApp === id) {
+      const userChoice = window.confirm(
+        'You are already logged into another tab.\n\nDo you want to log out of the other tab?'
+      );
+      if (userChoice) {
+        localStorage.setItem('currentApp', id);
+      } else {
+        navigate('/home');
+      }
+    } else {
+      localStorage.setItem('currentApp', id);
+    }
+
+    // Clear the localStorage on component unmount
+    return () => {
+      const activeApp = localStorage.getItem('currentApp');
+      if (activeApp === id) {
+        localStorage.removeItem('currentApp');
+      }
+    };
+  }, [id, navigate]);
 
   return (
     <div>
