@@ -1,9 +1,19 @@
-import React from 'react'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LoginScreen from './components/LoginScreen';
+import HomeScreen from './components/HomeScreen';
+import AppScreen from './components/AppScreen';
 
-const App = () => {
+function App() {
   return (
-    <div>App</div>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<LoginScreen />} />
+        <Route path="/home" element={<HomeScreen />} />
+        <Route path="/app/:id" element={<AppScreen />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
