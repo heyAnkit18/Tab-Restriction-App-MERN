@@ -2,8 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
-import './LoginScreen.css'; // Import the CSS file for styling
-
+import './LoginScreen.css'; 
 function LoginScreen() {
   const navigate = useNavigate();
 

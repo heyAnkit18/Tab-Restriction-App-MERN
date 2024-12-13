@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './HomeScreen.css'; // Import the CSS file for styling
+import './HomeScreen.css'; 
 
 function HomeScreen() {
   const [applications, setApplications] = useState([]); 
