@@ -1,32 +1,14 @@
 const AuditLog = require('../models/auditModel');
 
-// Mock applications data
-const applications = [
-  { id: '5eaa781456b9935e0b4fbc93', app_name: 'ORBIN' },
-  { id: '5eaa781424060409687ba049', app_name: 'ZILCH' },
-  { id: '5eaa7814ac87f820fa6fcce1', app_name: 'ZOXY' },
-  { id: '5eaa7814d19b4a7ec4ba5c49', app_name: 'SUPPORTAL' },
-  { id: '5eaa781483c7bc55a431f217', app_name: 'GONKLE' },
-  { id: '5eaa7814a9407212d5c74d8d', app_name: 'ZENTILITY' },
-  { id: '5eaa7814af7ae3086119c7dc', app_name: 'OBLIQ' },
-  { id: '5eaa7814a9f8e085c1055f86', app_name: 'APPLICA' },
-  { id: '5eaa781408f38cbe5745d37f', app_name: 'LUNCHPAD' },
-  { id: '5eaa78144bc1d00fa1f0598c', app_name: 'SOLGAN' },
-];
 
-// Fetch applications
-exports.getApplications = (req, res) => {
-  res.status(200).json(applications);
-};
-
-// Handle audit logs
-exports.handleAudit = async (req, res) => {
+const logActivity = async (userId, action, details = '') => {
   try {
-    const { userId, action } = req.body;
-    const newLog = new AuditLog({ userId, action });
+    const newLog = new AuditLog({ userId, action, details });
     await newLog.save();
-    res.status(201).json({ message: 'Audit logged successfully' });
+    console.log(`Audit log created: ${action}`);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to log audit' });
+    console.error('Error creating audit log:', error);
   }
 };
+
+module.exports = { logActivity }; 

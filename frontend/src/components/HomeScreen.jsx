@@ -3,32 +3,40 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function HomeScreen() {
-  const [applications, setApplications] = useState([]);
-  const [search, setSearch] = useState('');
+  const [applications, setApplications] = useState([]); 
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/applications')
-      .then((response) => setApplications(response.data))
-      .catch((error) => console.error(error));
+    let isMounted = true;
+
+    const fetchApplications = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/applications');
+        if (isMounted) {
+          setApplications(response.data); 
+        }
+      } catch (error) {
+        console.error('Error fetching applications:', error);
+      }
+    };
+
+    fetchApplications();
+
+    return () => {
+      isMounted = false; 
+    };
   }, []);
 
-  const filteredApps = applications.filter((app) =>
-    app.app_name.toLowerCase().includes(search.toLowerCase())
-  );
+  const handleApplicationSelect = (appId) => {
+    navigate(`/app/${appId}`); 
+  };
 
   return (
     <div>
-      <h1>Applications</h1>
-      <input
-        type="text"
-        placeholder="Search applications"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
+      <h1>Home Screen</h1>
       <ul>
-        {filteredApps.map((app) => (
-          <li key={app.id} onClick={() => navigate(`/app/${app.id}`)}>
+        {applications.map((app) => (
+          <li key={app.id} onClick={() => handleApplicationSelect(app.id)}>
             {app.app_name}
           </li>
         ))}
@@ -38,3 +46,5 @@ function HomeScreen() {
 }
 
 export default HomeScreen;
+
+

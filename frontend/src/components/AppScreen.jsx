@@ -8,37 +8,80 @@ function AppScreen() {
   const navigate = useNavigate();
 
   useEffect(() => {
-   
-    axios.get('http://localhost:5000/api/applications')
-      .then((response) => {
+    // Fetch the application details
+    const fetchApplication = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/applications');
         const app = response.data.find((app) => app.id === id);
-        setApplication(app);
-      })
-      .catch((error) => console.error('Error fetching applications:', error));
-  }, [id]);
+        if (app) {
+          setApplication(app);
+        } else {
+          console.error('Application not found');
+          navigate('/home');
+        }
+      } catch (error) {
+        console.error('Error fetching applications:', error);
+      }
+    };
+
+    fetchApplication();
+  }, [id, navigate]);
 
   useEffect(() => {
-    // Check for simultaneous tab usage
-    const currentApp = localStorage.getItem('currentApp');
-    if (currentApp && currentApp === id) {
-      const userChoice = window.confirm(
-        'You are already logged into another tab.\n\nDo you want to log out of the other tab?'
-      );
-      if (userChoice) {
-        localStorage.setItem('currentApp', id);
-      } else {
+    const handleStorageEvent = (event) => {
+      if (event.key === 'currentApp' && event.newValue !== id) {
+        
         navigate('/home');
       }
+    };
+
+    const displayConflictDialog = () => {
+      const conflictDiv = document.createElement('div');
+      conflictDiv.style.position = 'fixed';
+      conflictDiv.style.top = '50%';
+      conflictDiv.style.left = '50%';
+      conflictDiv.style.transform = 'translate(-50%, -50%)';
+      conflictDiv.style.backgroundColor = 'white';
+      conflictDiv.style.border = '1px solid #ccc';
+      conflictDiv.style.padding = '20px';
+      conflictDiv.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.1)';
+      conflictDiv.style.zIndex = '1000';
+      conflictDiv.innerHTML = `
+        <p>You are already logged into another tab.</p>
+        <button id="logout-other-tab">Log out of the other tab</button>
+        <button id="cancel-action">Cancel</button>
+      `;
+
+      document.body.appendChild(conflictDiv);
+
+      document.getElementById('logout-other-tab').onclick = () => {
+        localStorage.setItem('currentApp', 'none');
+        document.body.removeChild(conflictDiv);
+        navigate('/home');
+      };
+
+      document.getElementById('cancel-action').onclick = () => {
+        document.body.removeChild(conflictDiv);
+        navigate('/home');
+      };
+    };
+
+    const currentApp = localStorage.getItem('currentApp');
+
+    if (currentApp && currentApp === id) {
+      displayConflictDialog();
     } else {
       localStorage.setItem('currentApp', id);
     }
 
-    // Clear the localStorage on component unmount
+    window.addEventListener('storage', handleStorageEvent);
+
     return () => {
       const activeApp = localStorage.getItem('currentApp');
       if (activeApp === id) {
         localStorage.removeItem('currentApp');
       }
+      window.removeEventListener('storage', handleStorageEvent);
     };
   }, [id, navigate]);
 
@@ -58,4 +101,6 @@ function AppScreen() {
 }
 
 export default AppScreen;
+
+
 
