@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './AppScreen.css'; // Import the CSS file for styling
 
 function AppScreen() {
   const { id } = useParams(); 
@@ -30,22 +31,13 @@ function AppScreen() {
   useEffect(() => {
     const handleStorageEvent = (event) => {
       if (event.key === 'currentApp' && event.newValue !== id) {
-        
         navigate('/home');
       }
     };
 
     const displayConflictDialog = () => {
       const conflictDiv = document.createElement('div');
-      conflictDiv.style.position = 'fixed';
-      conflictDiv.style.top = '50%';
-      conflictDiv.style.left = '50%';
-      conflictDiv.style.transform = 'translate(-50%, -50%)';
-      conflictDiv.style.backgroundColor = 'white';
-      conflictDiv.style.border = '1px solid #ccc';
-      conflictDiv.style.padding = '20px';
-      conflictDiv.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.1)';
-      conflictDiv.style.zIndex = '1000';
+      conflictDiv.className = 'conflict-dialog';
       conflictDiv.innerHTML = `
         <p>You are already logged into another tab.</p>
         <button id="logout-other-tab">Log out of the other tab</button>
@@ -86,15 +78,15 @@ function AppScreen() {
   }, [id, navigate]);
 
   return (
-    <div>
+    <div className="app-screen">
       {application ? (
         <>
-          <h1>Application Screen</h1>
-          <p><strong>Application Name:</strong> {application.app_name}</p>
-          <p><strong>Application ID:</strong> {application.id}</p>
+          <h1 className="app-title">Application Screen</h1>
+          <p className="app-detail"><strong>Application Name:</strong> {application.app_name}</p>
+          <p className="app-detail"><strong>Application ID:</strong> {application.id}</p>
         </>
       ) : (
-        <p>Loading application details...</p>
+        <p className="loading">Loading application details...</p>
       )}
     </div>
   );
