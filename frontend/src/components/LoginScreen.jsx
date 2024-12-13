@@ -33,7 +33,7 @@ function LoginScreen() {
   };
 
   return (
-    <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID">
+    <GoogleOAuthProvider clientId="685914121022-6s8k2fie7vskafqkrekrd1hdpfv5rr85.apps.googleusercontent.com">
       <div className="login-screen">
         <h1 className="login-title">Login Screen</h1>
         <div className="google-login">
