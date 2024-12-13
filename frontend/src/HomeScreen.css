@@ -1,0 +1,33 @@
+/* HomeScreen.css */
+.home-screen {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .home-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .app-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .app-item {
+    font-size: 18px;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+  }
+  
+  .app-item:hover {
+    background-color: #f0f0f0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
