@@ -1,52 +1,68 @@
 .app-screen {
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
-  .app-title {
-    font-size: 24px;
-    margin-bottom: 10px;
-    color: #333;
-  }
-  
-  .app-detail {
-    font-size: 18px;
-    margin: 5px 0;
-    color: #555;
-  }
-  
-  .loading {
-    font-size: 16px;
-    color: #999;
-  }
-  
-  .conflict-dialog {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    border: 1px solid #ccc;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    text-align: center;
-  }
-  
-  .conflict-dialog p {
-    margin-bottom: 15px;
-    font-size: 16px;
-    color: #333;
-  }
-  
-  .conflict-dialog button {
-    padding: 10px 20px;
-    margin: 5px;
-    font-size: 14px;
-    cursor: pointer;
-  }
-  
-  .conflict-dialog button:hover {
-    background-color: #f0f0f0;
-  }
-  
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9; /* Light background for better contrast */
+  color: #333; /* Default text color */
+}
+
+.app-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #222; /* Slightly darker color for improved readability */
+  font-weight: bold;
+}
+
+.app-detail {
+  font-size: 18px;
+  margin: 5px 0;
+  color: #444; /* Adjusted for better contrast */
+  line-height: 1.6; /* Improved readability */
+}
+
+.loading {
+  font-size: 16px;
+  color: #777; /* Slightly darker for better visibility */
+  font-style: italic; /* Visual distinction */
+}
+
+.conflict-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow for a modern look */
+  z-index: 1000;
+  text-align: center;
+  border-radius: 8px; /* Rounded corners */
+}
+
+.conflict-dialog p {
+  margin-bottom: 15px;
+  font-size: 16px;
+  color: #333;
+  line-height: 1.5; /* Improved readability */
+}
+
+.conflict-dialog button {
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: #f8f8f8; /* Light button background */
+  border: 1px solid #ddd; /* Subtle border */
+  border-radius: 4px; /* Rounded corners */
+  transition: background-color 0.3s, box-shadow 0.3s; /* Smooth hover effect */
+}
+
+.conflict-dialog button:hover {
+  background-color: #eaeaea; /* Slightly darker hover background */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle hover shadow */
+}
+
+.conflict-dialog button:active {
+  background-color: #dcdcdc; /* Darker active state */
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Inset shadow for click effect */
+}
