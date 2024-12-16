@@ -2,19 +2,19 @@
 .home-screen {
   padding: 20px;
   font-family: 'Roboto', Arial, sans-serif;
-  background-color: #f4f4f9;
-  color: #333;
+  background-color: #f8f9fc; /* Lighter background for a modern look */
+  color: #2c3e50; /* Darker text for better contrast */
   min-height: 100vh;
 }
 
 .home-title {
-  font-size: 28px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #444;
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #34495e; /* Slightly darker title */
   text-align: center;
-  border-bottom: 2px solid #e0e0e0;
-  padding-bottom: 10px;
+  border-bottom: 3px solid #dfe4ea; /* Thicker border for emphasis */
+  padding-bottom: 12px;
 }
 
 .app-list {
@@ -22,32 +22,32 @@
   padding: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 16px;
   justify-content: center;
 }
 
 .app-item {
   font-size: 18px;
-  padding: 15px 20px;
-  margin-bottom: 10px;
-  background: linear-gradient(145deg, #ffffff, #e6e6e6);
-  border: 1px solid #ddd;
+  padding: 20px;
+  margin: 0; /* Removed bottom margin for consistent spacing */
+  background: linear-gradient(145deg, #ffffff, #eaeaea);
+  border: 1px solid #dcdcdc;
   border-radius: 12px;
   cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-align: center;
-  max-width: 200px;
-  flex: 1 1 calc(25% - 20px);
-  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1), -3px -3px 6px rgba(255, 255, 255, 0.5);
+  max-width: 220px; /* Slightly larger for better content fit */
+  flex: 1 1 calc(25% - 16px); /* Adjusted for consistent gap */
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.08), -3px -3px 6px rgba(255, 255, 255, 0.5);
 }
 
 .app-item:hover {
-  background: linear-gradient(145deg, #e0e0e0, #ffffff);
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.15), -4px -4px 10px rgba(255, 255, 255, 0.6);
-  transform: translateY(-5px);
+  background: linear-gradient(145deg, #f1f1f1, #ffffff);
+  box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.1), -5px -5px 12px rgba(255, 255, 255, 0.6);
+  transform: translateY(-6px);
 }
 
 .app-item:active {
-  transform: scale(0.98);
-  box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.2), inset -3px -3px 6px rgba(255, 255, 255, 0.5);
+  transform: scale(0.96);
+  box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.2), inset -4px -4px 8px rgba(255, 255, 255, 0.6);
 }
